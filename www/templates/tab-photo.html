@@ -1,0 +1,7 @@
+<ion-view view-title="Photo">
+  <ion-content>    
+    <ion-refresher pulling-text="Reload..." on-refresh="doRefresh()"></ion-refresher>
+    <ion-gallery ion-gallery-items="photos.results"></ion-gallery>
+    <ion-infinite-scroll ng-if="photos.hasMore" immediate-check="false" on-infinite="loadMore()"></ion-infinite-scroll>
+  </ion-content>
+</ion-view>

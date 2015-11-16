@@ -5,7 +5,15 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('frank', ['ionic', 
+                         'frank.controllers.photo', 
+                         'frank.controllers.about',
+                         'frank.controllers.blog',
+                         'frank.controllers.blog.detail',
+                         'frank.controllers.friends',
+                         'frank.controllers.podcast',
+                         'frank.service.photo'
+                         ])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -40,46 +48,66 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
+  .state('tab.about', {
+    url: '/about',
     views: {
       'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+        templateUrl: 'templates/tab-about.html',
+        controller: 'AboutController'
       }
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.blog', {
+      url: '/blog',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'tab-blog': {
+          templateUrl: 'templates/tab-blog.html',
+          controller: 'BlogController'
         }
       }
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
+    .state('tab.blog-detail', {
+      url: '/blog/:blogId',
       views: {
         'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
+          templateUrl: 'templates/tab-blog-detail.html',
+          controller: 'BlogDetailController'
         }
       }
     })
 
-  .state('tab.account', {
-    url: '/account',
+  .state('tab.photo', {
+    url: '/photo',
     views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
+      'tab-photo': {
+        templateUrl: 'templates/tab-photo.html',
+        controller: 'PhotoController'
+      }
+    }
+  })
+
+  .state('tab.podcast', {
+    url: '/podcast',
+    views: {
+      'tab-podcast': {
+        templateUrl: 'templates/tab-podcast.html',
+        controller: 'PodcastController'
+      }
+    }
+  })
+
+   .state('tab.friends', {
+    url: '/friends',
+    views: {
+      'tab-friends': {
+        templateUrl: 'templates/tab-friends.html',
+        controller: 'FriendsController'
       }
     }
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/about');
 
 });
