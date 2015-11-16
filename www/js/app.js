@@ -12,7 +12,8 @@ angular.module('frank', ['ionic',
                          'frank.controllers.blog.detail',
                          'frank.controllers.friends',
                          'frank.controllers.podcast',
-                         'frank.service.photo'
+                         'frank.service.photo',
+                         'frank.service.blog'
                          ])
 
 .run(function($ionicPlatform) {

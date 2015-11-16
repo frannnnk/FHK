@@ -1,28 +1,40 @@
-<ion-view view-title="Dashboard">
-  <ion-content class="padding">
-    <div class="list card">
-      <div class="item item-divider">Recent Updates</div>
-      <div class="item item-body">
-        <div>
-          There is a fire in <b>sector 3</b>
-        </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Health</div>
-      <div class="item item-body">
-        <div>
-          You ate an apple today!
-        </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Upcoming</div>
-      <div class="item item-body">
-        <div>
-          You have <b>29</b> meetings on your calendar tomorrow.
-        </div>
-      </div>
-    </div>
-  </ion-content>
-</ion-view>
+<ion-view view-title="Blog">
+  
+  
+   
+
+  <ion-content >
+
+   <ion-refresher
+        pulling-text="Reload ..."
+        on-refresh="doRefresh()" >
+    </ion-refresher >
+
+    <!--
+    This is the list of results rendered in the built in ionic 'card' list style.
+    -->
+    <ion-list>
+      <div class="list card"
+           ng-repeat="post in blogs.results"
+           ui-sref="post({id:post.link})">
+
+        <div class="item" >
+          <h2 >{{ post.title }}</h2 >
+
+          <p class="sub-title" ><i class="icon ion-ios-clock-outline"></i> {{ post.createDate }}</p >
+        </div >
+
+        <div class="item item-image" ng-if="post.indexImagePath" >
+          <img ng-src="{{ post.indexImagePath }}" >
+        </div >
+
+        <div class="item item-body" ng-if="post.desc">
+          <p >{{post.desc}}</p >
+        </div >
+      </div >
+    </ion-list>
+
+    <ion-infinite-scroll ng-if="blogs.hasMore" immediate-check="false" on-infinite="loadMore()"></ion-infinite-scroll>
+
+  </ion-content >
+</ion-view >

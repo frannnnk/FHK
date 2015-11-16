@@ -1,11 +1,10 @@
-var app = angular.module('frank.service.photo', []);
+var app = angular.module('frank.service.blog', []);
 
-app.constant("PHOTO_FEED_URL", "http://www.franks.hk/FrankServlet?action=getInstagramImage");
+app.constant("BLOG_FEED_URL", "http://www.franks.hk/FrankServlet?action=getPublishedBlogJSON&getcontent=false");
 app.constant("SERVER_URL", "http://www.franks.hk/");
 
-app.factory('PhotoService', function ($http, $q, PHOTO_FEED_URL, SERVER_URL) {
+app.factory('BlogService', function ($http, $q, BLOG_FEED_URL, SERVER_URL) {
 
-	
 
 	var self = {
 		'page': 0,
@@ -29,7 +28,7 @@ app.factory('PhotoService', function ($http, $q, PHOTO_FEED_URL, SERVER_URL) {
 
 			ionic.Platform.ready(function(){
 				
-				$http.get(PHOTO_FEED_URL+ "&limit=24&seq="+self.page)
+				$http.get(BLOG_FEED_URL+ "&limit=5&seq="+self.page)
 						.success(function (data) {
 							self.isLoading = false;
 							
@@ -38,6 +37,7 @@ app.factory('PhotoService', function ($http, $q, PHOTO_FEED_URL, SERVER_URL) {
 								self.hasMore = false;
 							} else {
 								angular.forEach(data, function (entry) {
+									console.log(entry);
 									if (entry.highServerUrl) {
 										entry.src = SERVER_URL+entry.lowServerUrl;
 										entry.highResSrc = SERVER_URL+entry.highServerUrl+"?"+Math.random();
