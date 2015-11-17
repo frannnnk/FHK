@@ -6,6 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('frank', ['ionic', 
+                         'ngCordova',
                          'frank.controllers.photo', 
                          'frank.controllers.about',
                          'frank.controllers.blog',
@@ -32,6 +33,18 @@ angular.module('frank', ['ionic',
   });
 })
 
+.directive('hideTabs', function($rootScope) {
+  return {
+      restrict: 'A',
+      link: function($scope, $el) {
+          $rootScope.hideTabs = 'tabs-item-hide';
+          $scope.$on('$destroy', function() {
+              $rootScope.hideTabs = '';
+          });
+      }
+  };
+})
+
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
@@ -41,7 +54,7 @@ angular.module('frank', ['ionic',
   $stateProvider
 
   // setup an abstract state for the tabs directive
-    .state('tab', {
+  .state('tab', {
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html'
@@ -58,25 +71,7 @@ angular.module('frank', ['ionic',
       }
     }
   })
-
-  .state('tab.blog', {
-      url: '/blog',
-      views: {
-        'tab-blog': {
-          templateUrl: 'templates/tab-blog.html',
-          controller: 'BlogController'
-        }
-      }
-    })
-    .state('tab.blog-detail', {
-      url: '/blog/:blogId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-blog-detail.html',
-          controller: 'BlogDetailController'
-        }
-      }
-    })
+    
 
   .state('tab.photo', {
     url: '/photo',
@@ -98,7 +93,7 @@ angular.module('frank', ['ionic',
     }
   })
 
-   .state('tab.friends', {
+  .state('tab.friends', {
     url: '/friends',
     views: {
       'tab-friends': {
@@ -106,8 +101,48 @@ angular.module('frank', ['ionic',
         controller: 'FriendsController'
       }
     }
+  })
+
+  .state('tab.blog', {
+      url: '/blog',
+      views: {
+        'tab-blog': {
+          templateUrl: 'templates/tab-blog.html',
+          controller: 'BlogController'
+        }
+      }
+    })
+
+  .state('tab.post', {
+      url: "/post/:id",
+      views: {
+        'tab-blog': {
+          templateUrl: "templates/tab-blog-detail.html",
+          controller: 'BlogDetailController'
+        }
+      }      
+    });
+
+ 
+
+
+  
+  /*
+
+   .state('tab.blogpost', {
+      url: "/blogpost/:id",
+      templateUrl: "templates/tab-blog-detail.html",
+      controller: 'BlogDetailController'
   });
 
+  .state('tab.blog-detail', {
+      url: '/blog-detail/:blogId',
+      templateUrl: 'templates/tab-blog-detail.html',
+      controller: 'BlogDetailController'
+  });
+  
+ 
+  */
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/about');
 

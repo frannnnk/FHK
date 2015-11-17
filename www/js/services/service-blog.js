@@ -60,7 +60,7 @@ app.factory('BlogService', function ($http, $q, BLOG_FEED_URL, SERVER_URL) {
 	};
 
 
-	self.load();
+	//self.load();
 
 
 	return self;
