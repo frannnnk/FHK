@@ -39,7 +39,7 @@ app.factory('PhotoService', function ($http, $q, PHOTO_FEED_URL, SERVER_URL) {
 							} else {
 								angular.forEach(data, function (entry) {
 									if (entry.highServerUrl) {
-										entry.src = SERVER_URL+entry.lowServerUrl;
+										entry.src = SERVER_URL+entry.lowServerUrl+"?"+Math.random();
 										entry.highResSrc = SERVER_URL+entry.highServerUrl+"?"+Math.random();
 										entry.sub = entry.caption; 
 									}

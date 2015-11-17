@@ -38,10 +38,8 @@ app.factory('BlogService', function ($http, $q, BLOG_FEED_URL, SERVER_URL) {
 							} else {
 								angular.forEach(data, function (entry) {
 									console.log(entry);
-									if (entry.highServerUrl) {
-										entry.src = SERVER_URL+entry.lowServerUrl;
-										entry.highResSrc = SERVER_URL+entry.highServerUrl+"?"+Math.random();
-										entry.sub = entry.caption; 
+									if (entry.indexImagePath) {
+										entry.indexImagePath = entry.indexImagePath+"?"+Math.random();
 									}
 									self.results.push(entry);
 								});
