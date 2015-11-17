@@ -11,7 +11,11 @@ app.controller('BlogController', function($scope, $ionicLoading, BlogService) {
 	$scope.$on('$ionicView.enter', function() {
 	    //analytics.trackView('Screen Title');
 	    console.log("blog list enter");
-	     $(".tab-nav.tabs").fadeIn("fast");
+	    //$(".tab-nav.tabs").fadeIn("fast");
+	});
+	$scope.$on('$ionicView.leave', function() {
+	    //analytics.trackView('Screen Title');
+	    console.log("blog list leave");
 	});
 
 	$scope.doRefresh = function(){

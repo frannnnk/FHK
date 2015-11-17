@@ -10,6 +10,11 @@ app.controller('BlogDetailController', function($scope,$stateParams) {
 	$scope.$on('$ionicView.enter', function() {
 	    //analytics.trackView('Screen Title');
 	    console.log("blog detail enter");
-	    $(".tab-nav.tabs").fadeOut("fast");
+	    //$(".tab-nav.tabs").hide("fast");
+	});
+	$scope.$on('$ionicView.leave', function() {
+	    //analytics.trackView('Screen Title');
+	    console.log("blog detail leave");
+	    //$(".tab-nav.tabs").hide("fast");
 	});
 });
