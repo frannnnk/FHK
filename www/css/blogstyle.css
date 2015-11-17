@@ -6,11 +6,12 @@ img {
 }
 
 .container{
-	font-family: 'Spinnaker',daty3;
-	font-size:130%;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 300;
+	font-size:120%;
 	line-height:150%;
 	color:#000;
-	padding:0px;
+	padding:6px;
 }
 
 .container img{
@@ -32,3 +33,14 @@ img {
 	margin-top:10px;
 	margin-bottom:10px;
 }
+
+img[src=""] {
+    padding: 5px;
+	background-color: white;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none ;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+

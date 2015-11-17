@@ -7,6 +7,8 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('frank', ['ionic', 
                          'ngCordova',
+                         'angular-bind-html-compile',
+                         'ionicLazyLoad',
                          'frank.controllers.photo', 
                          'frank.controllers.about',
                          'frank.controllers.blog',
@@ -14,7 +16,8 @@ angular.module('frank', ['ionic',
                          'frank.controllers.friends',
                          'frank.controllers.podcast',
                          'frank.service.photo',
-                         'frank.service.blog'
+                         'frank.service.blog',
+                         'frank.service.blog.detail'
                          ])
 
 .run(function($ionicPlatform) {

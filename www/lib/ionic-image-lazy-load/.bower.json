@@ -1,0 +1,37 @@
+{
+  "name": "ionic-image-lazy-load",
+  "main": "ionic-image-lazy-load.js",
+  "homepage": "https://github.com/paveisistemas/ionic-image-lazy-load",
+  "authors": [
+    "Vincius Zilli Pavei <vinicius@paveisistemas.com.br>",
+    "Michel Vidailhet <mvidailhet@mncc.fr>"
+  ],
+  "description": "Directive to Ionic Framework that only loads an image when it is seen by the user.",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "ionic",
+    "lazy",
+    "load",
+    "image"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "1beb93dc7e",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "1beb93dc7e38bf71df388c6d2af2e9baf5c0154d"
+  },
+  "_source": "git://github.com/paveisistemas/ionic-image-lazy-load.git",
+  "_target": "*",
+  "_originalSource": "ion-image-lazy-load",
+  "_direct": true
+}

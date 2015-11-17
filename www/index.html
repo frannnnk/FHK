@@ -5,8 +5,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style.css?v=0" rel="stylesheet">
     <link href="css/ion-gallery.css" rel="stylesheet">
+   
+
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -20,6 +22,9 @@
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="lib/angular-bind-html-compile/angular-bind-html-compile.js"></script>
+    <script src="lib/ionic-image-lazy-load/ionic-image-lazy-load.js"></script>
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
@@ -36,9 +41,15 @@
     <!-- Services  -->
     <script src="js/services/service-photo.js"></script>
     <script src="js/services/service-blog.js"></script>
+    <script src="js/services/service-blog-detail.js"></script>
 
     <!-- Third Party Plugin-->
     <script src="js/lib/ion-gallery.js"></script>
+
+
+
+
+
 
   </head>
   <body ng-app="frank">
