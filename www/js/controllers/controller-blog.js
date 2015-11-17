@@ -8,6 +8,12 @@ app.controller('BlogController', function($scope, $ionicLoading, BlogService) {
 		$ionicLoading.hide();
 	});
 
+	$scope.$on('$ionicView.enter', function() {
+	    //analytics.trackView('Screen Title');
+	    console.log("blog list enter");
+	     $(".tab-nav.tabs").fadeIn("fast");
+	});
+
 	$scope.doRefresh = function(){
 		if (!$scope.blogs.isLoading) {
 			$scope.blogs.refresh().then(function(){
