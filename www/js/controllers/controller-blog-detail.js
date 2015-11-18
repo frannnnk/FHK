@@ -1,4 +1,7 @@
-var app = angular.module('frank.controllers.blog.detail', []);
+var app = angular.module('frank.controllers.blog.detail', [
+															'angular-bind-html-compile',
+                         					 				'ionicLazyLoad'
+                         					 			  ]);
 
 app.controller('BlogDetailController', function($scope,$ionicLoading,$stateParams,BlogDetailService) {
 	$scope.postId = $stateParams.id;
@@ -8,7 +11,7 @@ app.controller('BlogDetailController', function($scope,$ionicLoading,$stateParam
 	$scope.blog = BlogDetailService;
 	$scope.blog.load($scope.postId).then(function(){
 		$ionicLoading.hide();
-		console.log($scope.blog.entry);
+		//console.log($scope.blog.entry);
 	});;
 
 	

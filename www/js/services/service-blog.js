@@ -37,7 +37,7 @@ app.factory('BlogService', function ($http, $q, BLOG_FEED_URL, SERVER_URL) {
 								self.hasMore = false;
 							} else {
 								angular.forEach(data, function (entry) {
-									console.log(entry);
+									//console.log(entry);
 									if (entry.indexImagePath) {
 										entry.indexImagePath = entry.indexImagePath+"?"+Math.random();
 									}

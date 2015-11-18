@@ -6,9 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('frank', ['ionic', 
-                         'ngCordova',
-                         'angular-bind-html-compile',
-                         'ionicLazyLoad',
+                         'ngCordova',                        
                          'frank.controllers.photo', 
                          'frank.controllers.about',
                          'frank.controllers.blog',
@@ -17,7 +15,8 @@ angular.module('frank', ['ionic',
                          'frank.controllers.podcast',
                          'frank.service.photo',
                          'frank.service.blog',
-                         'frank.service.blog.detail'
+                         'frank.service.blog.detail',
+                         'frank.service.podcast'
                          ])
 
 .run(function($ionicPlatform) {
