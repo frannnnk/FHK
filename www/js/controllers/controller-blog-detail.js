@@ -19,8 +19,8 @@ app.controller('BlogDetailController', function($scope,$ionicLoading,$stateParam
 	$scope.$on('$ionicView.enter', function() {
 	    //analytics.trackView('Screen Title');
 	    console.log("blog detail enter");
-	    $(".tab-nav.tabs").slideUp("fast");
-	    $("ion-content").removeClass("has-tabs");
+	    //$(".tab-nav.tabs").slideUp("fast");
+	    //$("ion-content").removeClass("has-tabs");
 	});
 	$scope.$on('$ionicView.leave', function() {
 	    //analytics.trackView('Screen Title');

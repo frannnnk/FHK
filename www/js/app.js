@@ -35,6 +35,7 @@ angular.module('frank', ['ionic',
   });
 })
 
+/*
 .directive('hideTabs', function($rootScope) {
   return {
       restrict: 'A',
@@ -46,6 +47,7 @@ angular.module('frank', ['ionic',
       }
   };
 })
+*/
 
 .config(function($stateProvider, $urlRouterProvider) {
 

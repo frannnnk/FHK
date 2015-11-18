@@ -34,6 +34,19 @@ img {
 	margin-bottom:10px;
 }
 
+div.well {
+	padding:16px;
+	background-color: #fcfcfc;
+	margin-bottom: 10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	
+	
+
+	
+}
+
 img[src=""] {
     padding: 5px;
 	background-color: white;

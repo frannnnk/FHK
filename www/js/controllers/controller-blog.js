@@ -11,7 +11,7 @@ app.controller('BlogController', function($scope, $ionicLoading, BlogService) {
 	$scope.$on('$ionicView.enter', function() {
 	    //analytics.trackView('Screen Title');
 	    console.log("blog list enter");
-	    $(".tab-nav.tabs").slideDown("fast");
+	    //$(".tab-nav.tabs").slideDown("fast");
 	});
 	$scope.$on('$ionicView.leave', function() {
 	    //analytics.trackView('Screen Title');
