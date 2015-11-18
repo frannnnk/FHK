@@ -28,7 +28,7 @@ app.factory('BlogService', function ($http, $q, BLOG_FEED_URL, SERVER_URL) {
 
 			ionic.Platform.ready(function(){
 				
-				$http.get(BLOG_FEED_URL+ "&limit=5&seq="+self.page)
+				$http.get(BLOG_FEED_URL+ "&limit=4&seq="+self.page)
 						.success(function (data) {
 							self.isLoading = false;
 							

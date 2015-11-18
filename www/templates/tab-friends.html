@@ -1,14 +1,28 @@
-<ion-view view-title="Account" hide-nav-bar="true">
+<ion-view view-title="Friends" hide-nav-bar="true">
   
   <ion-header-bar align-title="center" class="bar-dark">
     <h1 class="title"><img class="title-image" src="img/logo_hk.png" /></h1>
   </ion-header-bar>
   
-  <ion-content>
-    <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
-    </ion-list>
+  <ion-content style="background-color:#3598de;" scroll="false">
+    <div style="margin: 0 auto; width:300px">
+        <img src=" img/hi.jpg " width="300px" alt="" >
+    </div>
+
+    <div class="list list-inset">
+       <label class="item item-input">
+        <input type="email" placeholder="Your Email">
+      </label>
+    </div>
+
+    
+    <div class="row">
+       <div class="col text-center">
+          <button class="button button-energized">
+            進入小夥伴專區
+          </button>
+       </div>
+    </div>
+
   </ion-content>
 </ion-view>

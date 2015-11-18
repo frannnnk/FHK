@@ -13,4 +13,19 @@ body {
 	margin-top: -5px;
 }
 
+/* http://stackoverflow.com/questions/25719408/angularjs-animate-image-on-src-change */
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+    /*transition: all linear 0.5s;*/
+    transition: opacity .25s ease-in-out;
+    display: block !important;
+}
+
+.animate-show.ng-hide-add.ng-hide-add-active, .animate-show.ng-hide-remove {
+    opacity: 0;
+}
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
+}
+
 

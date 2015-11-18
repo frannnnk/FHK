@@ -29,7 +29,7 @@ app.factory('PhotoService', function ($http, $q, PHOTO_FEED_URL, SERVER_URL) {
 
 			ionic.Platform.ready(function(){
 				
-				$http.get(PHOTO_FEED_URL+ "&limit=24&seq="+self.page)
+				$http.get(PHOTO_FEED_URL+ "&limit=15&seq="+self.page)
 						.success(function (data) {
 							self.isLoading = false;
 							
