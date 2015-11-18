@@ -53,6 +53,9 @@ app.factory('PodcastService', function ($http, $q, $timeout, $cordovaFile,  $cor
 									track.id = "podcast_"+entry.id;
 									track.uniqueName = track.id+'.'+(track.url.split('.')[track.url.split('.').length-1]);
 
+									// Check file existence in device?
+									// Check data to localStrorage?  
+
 									self.results.push(track);
 								});
 							}
