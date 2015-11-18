@@ -16,7 +16,8 @@ angular.module('frank', ['ionic',
                          'frank.service.photo',
                          'frank.service.blog',
                          'frank.service.blog.detail',
-                         'frank.service.podcast'
+                         'frank.service.podcast',
+                         'ngIOS9UIWebViewPatch'
                          ])
 
 .run(function($ionicPlatform) {

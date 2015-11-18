@@ -10,23 +10,28 @@
         pulling-text="Reload ..."
         on-refresh="doRefresh()" >
     </ion-refresher >
+    
+
     <ion-list>
-      <ion-audio-track ng-repeat="track in podcasts.results" track="track">
-          <div class="list list-inset">
-              <div class="item item-thumbnail-left">
-                  <img src="{{track.art}}">
-                  <h2>{{track.title}}</h2>
-                  <p>{{track.artist}}</p>
-                  <ion-audio-controls>
-                        <a class="button button-icon icon" ion-audio-play></a>
-                        <ion-spinner icon="ios"></ion-spinner>
-                    </ion-audio-controls>
-              </div>
-              <div class="item">
-                <ion-audio-progress-bar display-time></ion-audio-progress-bar>
-              </div>
-          </div>
-      </ion-audio-track>
+      <div class="list card"
+           ng-repeat="track in podcasts.results"
+           >
+
+        <div class="item" >
+          <h2 >{{ track.title }}</h2 >
+
+          <p class="sub-title" ><i class="icon ion-ios-clock-outline"></i> {{ track.artist }}</p >
+          <p class="sub-title" > {{ track.downloadProgress }}</p >
+          <a ng-click="download(track)">Download</a>
+          <a ng-click="checkFile(track)">checkFile</a>
+        </div >
+
+       
+
+        <div class="item item-body" ng-if="post.desc">
+          <p >{{track.desc}}</p >
+        </div >
+      </div >
     </ion-list>
 
     <ion-infinite-scroll ng-if="podcasts.hasMore" immediate-check="false" on-infinite="loadMore()"></ion-infinite-scroll>

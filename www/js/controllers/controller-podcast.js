@@ -1,6 +1,6 @@
 var app = angular.module('frank.controllers.podcast', ['ionic-audio']);
 
-app.controller('PodcastController', function($scope, $ionicLoading, PodcastService) {
+app.controller('PodcastController', function($scope, $ionicLoading,PodcastService) {
 	// Plugin: http://arielfaur.github.io/ionic-audio/
 	// Media URL: http://www.franks.hk/FrankServlet?action=getPodcastJSON&seq=0&limit=5
 
@@ -34,6 +34,22 @@ app.controller('PodcastController', function($scope, $ionicLoading, PodcastServi
 				$scope.$broadcast('scroll.infiniteScrollComplete');
 			});
 		}
+	};
+	$scope.download = function(track){
+		console.log("Downloading "+track.title+" "+track.url);
+		
+		$scope.podcasts.download(track).then(function(result){
+			console.log(track.title + " ("+track.uniqueName+")" + " download completed.");
+			console.log(JSON.stringify(result));
+			console.log(result.fullPath);
+			console.log(result.nativeURL);
+		});
+		
+	};
+	$scope.checkFile = function(track){
+		
+		$scope.podcasts.checkFile(track);
+		
 	};
 
 

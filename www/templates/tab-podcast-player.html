@@ -1,0 +1,36 @@
+<ion-view view-title="Podcast" hide-nav-bar="true">
+  
+  <ion-header-bar align-title="center" class="bar-dark">
+    <h1 class="title"><img class="title-image" src="img/logo_hk.png" /></h1>
+  </ion-header-bar>
+  
+  <ion-content>
+
+    <ion-refresher
+        pulling-text="Reload ..."
+        on-refresh="doRefresh()" >
+    </ion-refresher >
+    <ion-list>
+      <ion-audio-track ng-repeat="track in podcasts.results" track="track">
+          <div class="list list-inset">
+              <div class="item item-thumbnail-left">
+                  <img src="{{track.art}}">
+                  <h2>{{track.title}}</h2>
+                  <p>{{track.artist}}</p>
+                  <ion-audio-controls>
+                        <a class="button button-icon icon" ion-audio-play></a>
+                        <ion-spinner icon="ios"></ion-spinner>
+                    </ion-audio-controls>
+              </div>
+              <div class="item">
+                <ion-audio-progress-bar display-time></ion-audio-progress-bar>                
+              </div>
+
+          </div>
+      </ion-audio-track>
+    </ion-list>
+
+    <ion-infinite-scroll ng-if="podcasts.hasMore" immediate-check="false" on-infinite="loadMore()"></ion-infinite-scroll>
+
+  </ion-content>
+</ion-view>
