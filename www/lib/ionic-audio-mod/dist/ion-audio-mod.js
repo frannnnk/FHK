@@ -279,7 +279,7 @@ angular.module('ionic-audio-mod', ['ionic'])
             }
         }
     }])
-    .directive('ionAudioControls','$localstorage', [function($localstorage) {
+    .directive('ionAudioControls', [function($localstorage) {
         return {
           restrict: 'EA',
           scope: {},
@@ -519,22 +519,9 @@ angular.module('ionic-audio-mod', ['ionic'])
               
                 });
 
-                var unbindStatusListener = scope.$watch('track.status', function (status) {
-                    //  Media.MEDIA_NONE or Media.MEDIA_STOPPED
-                    if (status == 0 || status == 4) {
-                        init();
-                    } else if (status == 2) {   // Media.MEDIA_RUNNING
-                        isLoading = false;
-                    }
-
-                    currentStatus = status;
-                });
-
                 init();
 
-                scope.$on('$destroy', function() {
-                    unbindStatusListener();
-                });
+               
             }
         }
     }])
