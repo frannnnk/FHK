@@ -307,7 +307,7 @@ angular.module('ionic-audio-mod', ['ionic'])
                     
                     var url = track.remoteURL;
                     console.log("File will be rename to "+track.uniqueName+" in device.");
-                    var targetPath = "/" + track.uniqueName;
+                    var targetPath = cordova.file.documentsDirectory + track.uniqueName;
                     var trustHosts = true
                     var options = {};
 
@@ -397,11 +397,12 @@ angular.module('ionic-audio-mod', ['ionic'])
                     if (!scope.track.isDownloaded) {
                         // Check if file exist in device
                         ionic.Platform.ready(function(){
-                            console.log('Checking file with uniqueName: '+ scope.track.uniqueName+ ' Path:'+cordova.file.documentsDirectory+scope.track.uniqueName);
+                            console.log('Checking file with uniqueName: '+ scope.track.uniqueName);
 
-                            $cordovaFile.checkFile("/", scope.track.uniqueName)
+                            $cordovaFile.checkFile(cordova.file.documentsDirectory, scope.track.uniqueName)
                             .then(function (success) {
                                 // Exist
+                                console.log("File exists.");
                                 scope.track.isDownloaded = true;
                                 if (isLoading) return;  //  debounce multiple clicks
                                 controller.playTrack();
@@ -411,10 +412,9 @@ angular.module('ionic-audio-mod', ['ionic'])
                                 
                               }, function (error) {
                                 // Not exist, go download it
-
+                                console.log("File not exists, now download file...");
                                 if (isDownloading) return;  //  debounce multiple clicks                        
                                 isDownloading = true;
-                                console.log("Track is not downloaded yet, now download file...");
                                 controller.downloadTrack(scope.track).then(function(result){
                                     console.log(scope.track.title + " ("+scope.track.uniqueName+")" + " download completed.");
                                     console.log(JSON.stringify(result));
