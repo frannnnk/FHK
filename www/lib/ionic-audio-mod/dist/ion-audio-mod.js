@@ -1,4 +1,4 @@
-angular.module('ionic-audio-mod', ['ionic'])
+angular.module('ionic-audio-mod', ['ionic','ionic.utils'])
     .filter('time', function() {
         return function(input) {
             input = input || 0;
