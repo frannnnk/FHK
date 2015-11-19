@@ -17,6 +17,7 @@ angular.module('frank', ['ionic',
                          'frank.service.blog',
                          'frank.service.blog.detail',
                          'frank.service.podcast',
+                         'frank.service.friend',
                          'ionic.utils',
                          'ngIOS9UIWebViewPatch'
                          ])
@@ -138,6 +139,16 @@ angular.module('frank', ['ionic',
         'tab-blog': {
           templateUrl: "templates/tab-blog-detail.html",
           controller: 'BlogDetailController'
+        }
+      }      
+    })
+
+  .state('tab.friendservice', {
+      url: "/fs",
+      views: {
+        'tab-blog': {
+          templateUrl: "templates/tab-friend-service.html",
+          controller: 'FriendServiceController'
         }
       }      
     });
