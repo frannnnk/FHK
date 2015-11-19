@@ -302,7 +302,7 @@ angular.module('ionic-audio-mod', ['ionic'])
 
               this.downloadTrack = function(track) {
                 var deferred = $q.defer();
-                console.log('ionAudioControls now downloading '+track.title +" ID:"+ track.id +' from '+ track.url);
+                console.log('ionAudioControls now downloading '+track.title +" ID:"+ track.id +' from '+ track.remoteURL);
                 ionic.Platform.ready(function(){
                     
                     var url = track.remoteURL;
