@@ -53,7 +53,7 @@ app.factory('PodcastService', function ($http, $q, $timeout, $cordovaFile,  $cor
 									track.id = "podcast_"+entry.id;
 									track.uniqueName = track.id+'.'+(track.remoteURL.split('.')[track.remoteURL.split('.').length-1]);
 									track.isDownloaded = false;
-									track.url = cordova.file.documentsDirectory+scope.track.uniqueName;
+									track.url = cordova.file.documentsDirectory+track.uniqueName;
 
 									// Check file existence in device?
 									// Check data to localStrorage?  
