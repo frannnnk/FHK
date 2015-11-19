@@ -307,7 +307,7 @@ angular.module('ionic-audio-mod', ['ionic'])
                     
                     var url = track.remoteURL;
                     console.log("File will be rename to "+track.uniqueName+" in device.");
-                    var targetPath = cordova.file.documentsDirectory + track.uniqueName;
+                    var targetPath = "/" + track.uniqueName;
                     var trustHosts = true
                     var options = {};
 
@@ -399,7 +399,7 @@ angular.module('ionic-audio-mod', ['ionic'])
                         ionic.Platform.ready(function(){
                             console.log('Checking file with uniqueName: '+ scope.track.uniqueName+ ' Path:'+cordova.file.documentsDirectory+scope.track.uniqueName);
 
-                            $cordovaFile.checkFile(cordova.file.documentsDirectory, scope.track.uniqueName)
+                            $cordovaFile.checkFile("/", scope.track.uniqueName)
                             .then(function (success) {
                                 // Exist
                                 scope.track.isDownloaded = true;
