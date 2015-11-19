@@ -284,7 +284,7 @@ angular.module('ionic-audio-mod', ['ionic'])
           restrict: 'EA',
           scope: {},
           require: ['ionAudioControls', '^^ionAudioTrack'],
-          controller: ['$scope', '$q', '$element', '$cordovaFile', '$cordovaFileTransfer', function($scope, $q, $element, $cordovaFile,  $cordovaFileTransfer) {
+          controller: ['$scope', '$q', '$timeout', '$element', '$cordovaFile', '$cordovaFileTransfer', function($scope, $q, $timeout, $element, $cordovaFile,  $cordovaFileTransfer) {
               var spinnerElem = $element.find('ion-spinner'), hasLoaded, self = this;
 
               spinnerElem.addClass('ng-hide');
@@ -321,7 +321,7 @@ angular.module('ionic-audio-mod', ['ionic'])
                         deferred.reject(err);
                       }, function (progress) {
                         $timeout(function () {
-                          track.downloadProgress = (progress.loaded / progress.total) * 100;
+                          track.downloadProgress = parseInt(  (progress.loaded / progress.total) * 100 , 10);
                         })
                       });
 
