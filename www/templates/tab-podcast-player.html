@@ -20,10 +20,13 @@
                   <ion-audio-controls>
                         <a class="button button-icon icon" ion-audio-play></a>
                         <a class="button button-icon icon" ion-audio-download></a>
-                        <span>{{track.downloadProgress}}</span>
                         <ion-spinner icon="ios"></ion-spinner>
                     </ion-audio-controls>
+                     <div style="border-top:2px solid black;width:{{track.downloadProgress}}%;">
+                             
+                    </div>
               </div>
+             
               <div class="item">
                 <ion-audio-progress-bar display-time></ion-audio-progress-bar>                
               </div>
