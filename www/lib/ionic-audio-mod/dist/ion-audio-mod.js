@@ -279,7 +279,7 @@ angular.module('ionic-audio-mod', ['ionic'])
             }
         }
     }])
-    .directive('ionAudioControls', [function() {
+    .directive('ionAudioControls','$localstorage', [function($localstorage) {
         return {
           restrict: 'EA',
           scope: {},
@@ -314,6 +314,7 @@ angular.module('ionic-audio-mod', ['ionic'])
                     $cordovaFileTransfer.download(url, targetPath, options, trustHosts)
                       .then(function(result) {
                         // Success!
+                        $localstorage.set(track.uniqueName, 'true');
                         track.isDownloaded = true;
                         deferred.resolve(result);
                       }, function(err) {
@@ -394,59 +395,125 @@ angular.module('ionic-audio-mod', ['ionic'])
 
                 element.on('click', function() {
 
-                    if (!scope.track.isDownloaded) {
-                        // Check if file exist in device
-                        ionic.Platform.ready(function(){
-                            console.log('Checking file with uniqueName: '+ scope.track.uniqueName);
-
-                            $cordovaFile.checkFile(cordova.file.documentsDirectory, scope.track.uniqueName)
-                            .then(function (success) {
-                                // Exist
-                                console.log("File exists.");
-                                scope.track.isDownloaded = true;
-                                if (isLoading) return;  //  debounce multiple clicks
-                                controller.playTrack();
-                                togglePlaying();
-                                if (currentStatus == 0) isLoading = true;
-
-                                
-                              }, function (error) {
-                                // Not exist, go download it
-                                console.log("File not exists, now download file...");
-                                if (isDownloading) return;  //  debounce multiple clicks                        
-                                isDownloading = true;
-                                controller.downloadTrack(scope.track).then(function(result){
-                                    console.log(scope.track.title + " ("+scope.track.uniqueName+")" + " download completed.");
-                                    console.log(JSON.stringify(result));
-                                    console.log(result.fullPath);
-                                    console.log(result.nativeURL);
-
-                                    isDownloading = false;
-                                    scope.track.isDownloaded = true;
-
-                                    if ( currentStatus != 2 ) {
-                                        // Play media if not playing
-                                        if (isLoading) return;  //  debounce multiple clicks
-                                        controller.playTrack();
-                                        togglePlaying();
-                                        if (currentStatus == 0) isLoading = true;
-                                    }
-                                    
-                                });
-
-                                
-                              });
-
-                        }); //- ionic.Platform.ready
-
-                        return;
-                    }
                     
+                    // Check if file exist in device
+                    ionic.Platform.ready(function(){
+                        console.log('Checking file with uniqueName: '+ scope.track.uniqueName);
 
-                    if (isLoading) return;  //  debounce multiple clicks
-                    controller.playTrack();
-                    togglePlaying();
-                    if (currentStatus == 0) isLoading = true;
+                        $cordovaFile.checkFile(cordova.file.documentsDirectory, scope.track.uniqueName)
+                        .then(function (success) {
+                            // Exist
+                            console.log("File exists.");
+                            scope.track.isDownloaded = true;
+                            $localstorage.set(scope.track.uniqueName, 'true');
+
+                            // Play Audio
+                            if (isLoading) return;  //  debounce multiple clicks
+                            controller.playTrack();
+                            togglePlaying();
+                            if (currentStatus == 0) isLoading = true;
+
+                            
+                          }, function (error) {
+                            // Not exist, go download it
+                            console.log("File not exists, now download file...");
+                            $localstorage.set(scope.track.uniqueName, 'false');
+
+                            if (isDownloading) return;  //  debounce multiple clicks                        
+                            isDownloading = true;
+                            controller.downloadTrack(scope.track).then(function(result){
+                                console.log(scope.track.title + " ("+scope.track.uniqueName+")" + " download completed.");
+                                console.log(JSON.stringify(result));
+                                console.log(result.fullPath);
+                                console.log(result.nativeURL);
+
+                                isDownloading = false;
+                                scope.track.isDownloaded = true;
+                                
+                            });
+
+                            
+                          });
+
+                    }); //- ionic.Platform.ready
+
+                     
+                });
+
+                var unbindStatusListener = scope.$watch('track.status', function (status) {
+                    //  Media.MEDIA_NONE or Media.MEDIA_STOPPED
+                    if (status == 0 || status == 4) {
+                        init();
+                    } else if (status == 2) {   // Media.MEDIA_RUNNING
+                        isLoading = false;
+                    }
+
+                    currentStatus = status;
+                });
+
+                init();
+
+                scope.$on('$destroy', function() {
+                    unbindStatusListener();
+                });
+            }
+        }
+    }])
+
+    
+    .directive('ionAudioDownload', ['$cordovaFile', '$cordovaFileTransfer', function( $cordovaFile, $cordovaFileTransfer) {
+        return {
+            //scope: true,
+            restrict: 'A',
+            require: ['^^ionAudioTrack', '^^ionAudioControls'],
+            link: function(scope, element, attrs, controllers) {
+                var isLoading, currentStatus = 0;
+                var isDownloading = false; 
+                scope.track = controllers[0].getTrack();
+                var controller = controllers[1];
+
+                var init = function() {
+                    isLoading = false;
+                    element.addClass('ion-ios-download-outline');
+                    element.removeClass('ion-load-d');
+                    //element.text(attrs.textPlay);
+                };
+
+
+                element.on('click', function() {
+
+                    // Check if file exist in device
+                    ionic.Platform.ready(function(){
+                        console.log('Checking file with uniqueName: '+ scope.track.uniqueName);
+                        $cordovaFile.checkFile(cordova.file.documentsDirectory, scope.track.uniqueName)
+                        .then(function (success) {
+                            // Exist
+                            console.log("File exists.");
+                            scope.track.isDownloaded = true;
+                            $localstorage.set(scope.track.uniqueName, 'true');                            
+                          }, function (error) {
+                            // Not exist, go download it
+                            console.log("File not exists, now download file...");
+                            if (isDownloading) return;  //  debounce multiple clicks                        
+                            isDownloading = true;
+                            controller.downloadTrack(scope.track).then(function(result){
+                                console.log(scope.track.title + " ("+scope.track.uniqueName+")" + " download completed.");
+                                console.log(JSON.stringify(result));
+                                console.log(result.fullPath);
+                                console.log(result.nativeURL);
+
+                                isDownloading = false;
+                                scope.track.isDownloaded = true;
+                                
+                            });
+
+                            
+                          });
+
+                    }); //- ionic.Platform.ready
+
+                        
+              
                 });
 
                 var unbindStatusListener = scope.$watch('track.status', function (status) {

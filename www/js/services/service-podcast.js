@@ -3,7 +3,7 @@ var app = angular.module('frank.service.podcast', []);
 app.constant("MEDIA_FEED_URL", "http://www.franks.hk/FrankServlet?action=getPodcastJSON&getcontent=false");
 app.constant("SERVER_URL", "http://www.franks.hk/");
 
-app.factory('PodcastService', function ($http, $q, $timeout, $cordovaFile,  $cordovaFileTransfer, MEDIA_FEED_URL, SERVER_URL) {
+app.factory('PodcastService', function ($http, $q, $timeout, $cordovaFile, $localstorage, $cordovaFileTransfer, MEDIA_FEED_URL, SERVER_URL) {
 
 
 	var self = {
@@ -52,8 +52,13 @@ app.factory('PodcastService', function ($http, $q, $timeout, $cordovaFile,  $cor
 									track.downloadProgress = 0;
 									track.id = "podcast_"+entry.id;
 									track.uniqueName = track.id+'.'+(track.remoteURL.split('.')[track.remoteURL.split('.').length-1]);
-									track.isDownloaded = false;
 									track.url = "documents://"+track.uniqueName;
+
+									if ( "true" == $localstorage.get(track.uniqueName)) {
+ 										track.isDownloaded = true;
+									} else {
+										track.isDownloaded = false;
+									}
 
 									// Check file existence in device?
 									// Check data to localStrorage?  

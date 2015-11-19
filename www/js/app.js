@@ -17,6 +17,7 @@ angular.module('frank', ['ionic',
                          'frank.service.blog',
                          'frank.service.blog.detail',
                          'frank.service.podcast',
+                         'ionic.utils',
                          'ngIOS9UIWebViewPatch'
                          ])
 
