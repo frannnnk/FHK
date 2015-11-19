@@ -482,6 +482,9 @@ angular.module('ionic-audio-mod', ['ionic'])
 
                 element.on('click', function() {
 
+                    element.addClass('ion-load-d');
+                    element.removeClass('ion-ios-download-outline');
+
                     // Check if file exist in device
                     ionic.Platform.ready(function(){
                         console.log('Checking file with uniqueName: '+ scope.track.uniqueName);
