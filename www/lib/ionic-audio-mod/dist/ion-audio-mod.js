@@ -424,10 +424,14 @@ angular.module('ionic-audio-mod', ['ionic'])
                                     isDownloading = false;
                                     scope.track.isDownloaded = true;
 
-                                    if (isLoading) return;  //  debounce multiple clicks
-                                    controller.playTrack();
-                                    togglePlaying();
-                                    if (currentStatus == 0) isLoading = true;
+                                    if ( currentStatus != 2 ) {
+                                        // Play media if not playing
+                                        if (isLoading) return;  //  debounce multiple clicks
+                                        controller.playTrack();
+                                        togglePlaying();
+                                        if (currentStatus == 0) isLoading = true;
+                                    }
+                                    
                                 });
 
                                 
