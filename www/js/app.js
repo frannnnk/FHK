@@ -105,7 +105,7 @@ angular.module('frank', ['ionic',
     url: '/podcast',
     views: {
       'tab-podcast': {
-        templateUrl: 'templates/tab-podcast.html',
+        templateUrl: 'templates/tab-podcast-player.html',
         controller: 'PodcastController'
       }
     }

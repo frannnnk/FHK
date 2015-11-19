@@ -1,4 +1,4 @@
-var app = angular.module('frank.controllers.podcast', ['ionic-audio']);
+var app = angular.module('frank.controllers.podcast', ['ionic-audio-mod']);
 
 app.controller('PodcastController', function($scope, $ionicLoading,PodcastService) {
 	// Plugin: http://arielfaur.github.io/ionic-audio/
