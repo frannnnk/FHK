@@ -42,8 +42,8 @@ app.factory('PodcastService', function ($http, $q, $timeout, $cordovaFile,  $cor
 										entry.indexImagePath = entry.indexImagePath+"?"+Math.random();
 									}
 
-									var track = {};
-									track.url = entry.mediaURL;
+									var track = {};									
+									track.remoteURL = entry.mediaURL;
 									track.artist = 'Frank';
 									track.title = entry.title;
 									track.art = entry.indexImagePath;
@@ -51,8 +51,9 @@ app.factory('PodcastService', function ($http, $q, $timeout, $cordovaFile,  $cor
 									track.publishDate = entry.publishDate;
 									track.downloadProgress = 0;
 									track.id = "podcast_"+entry.id;
-									track.uniqueName = track.id+'.'+(track.url.split('.')[track.url.split('.').length-1]);
+									track.uniqueName = track.id+'.'+(track.remoteURL.split('.')[track.remoteURL.split('.').length-1]);
 									track.isDownloaded = false;
+									track.url = cordova.file.documentsDirectory+scope.track.uniqueName;
 
 									// Check file existence in device?
 									// Check data to localStrorage?  

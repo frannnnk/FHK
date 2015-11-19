@@ -22,7 +22,7 @@
                         <a class="button button-icon icon" ion-audio-download></a>
                         <ion-spinner icon="ios"></ion-spinner>
                     </ion-audio-controls>
-                     <div style="border-top:2px solid black;width:{{track.downloadProgress}}%;">
+                     <div ng-hide="track.isDownloaded" style="border-top:2px solid black;width:{{track.downloadProgress}}%;">
                              
                     </div>
               </div>

@@ -305,7 +305,7 @@ angular.module('ionic-audio-mod', ['ionic'])
                 console.log('ionAudioControls now downloading '+track.title +" ID:"+ track.id +' from '+ track.url);
                 ionic.Platform.ready(function(){
                     
-                    var url = track.url;
+                    var url = track.remoteURL;
                     console.log("File will be rename to "+track.uniqueName+" in device.");
                     var targetPath = cordova.file.documentsDirectory + track.uniqueName;
                     var trustHosts = true
@@ -367,7 +367,8 @@ angular.module('ionic-audio-mod', ['ionic'])
             restrict: 'A',
             require: ['^^ionAudioTrack', '^^ionAudioControls'],
             link: function(scope, element, attrs, controllers) {
-                var isLoading, currentStatus = 0;                
+                var isLoading, currentStatus = 0;
+                var isDownloading = false;                
                 
                 scope.track = controllers[0].getTrack();
                 
@@ -394,20 +395,47 @@ angular.module('ionic-audio-mod', ['ionic'])
                 element.on('click', function() {
 
                     if (!scope.track.isDownloaded) {
-                        // Track not downloaded yet
-                        console.log("Track is not downloaded yet, now download file...");
-                        controller.downloadTrack(scope.track).then(function(result){
-                            console.log(scope.track.title + " ("+scope.track.uniqueName+")" + " download completed.");
-                            console.log(JSON.stringify(result));
-                            console.log(result.fullPath);
-                            console.log(result.nativeURL);
-                        });
+                        // Check if file exist in device
+                        ionic.Platform.ready(function(){
+                            console.log('Checking file with uniqueName: '+ scope.track.uniqueName+ ' Path:'+cordova.file.documentsDirectory+scope.track.uniqueName);
+
+                            $cordovaFile.checkFile(cordova.file.documentsDirectory, scope.track.uniqueName)
+                            .then(function (success) {
+                                // Exist
+                                scope.track.isDownloaded = true;
+
+                                
+                              }, function (error) {
+                                // Not exist, go download it
+
+                                if (isDownloading) return;  //  debounce multiple clicks                        
+                                isDownloading = true;
+                                console.log("Track is not downloaded yet, now download file...");
+                                controller.downloadTrack(scope.track).then(function(result){
+                                    console.log(scope.track.title + " ("+scope.track.uniqueName+")" + " download completed.");
+                                    console.log(JSON.stringify(result));
+                                    console.log(result.fullPath);
+                                    console.log(result.nativeURL);
+
+                                    isDownloading = false;
+                                    scope.track.isDownloaded = true;
+
+                                    if (isLoading) return;  //  debounce multiple clicks
+                                    controller.playTrack();
+                                    togglePlaying();
+                                    if (currentStatus == 0) isLoading = true;
+                                });
+
+                                
+                              });
+
+                        }); //- ionic.Platform.ready
+
                         return;
                     }
                     
 
                     if (isLoading) return;  //  debounce multiple clicks
-
                     controller.playTrack();
                     togglePlaying();
                     if (currentStatus == 0) isLoading = true;

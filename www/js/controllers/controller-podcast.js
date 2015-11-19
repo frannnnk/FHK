@@ -43,6 +43,8 @@ app.controller('PodcastController', function($scope, $ionicLoading,PodcastServic
 			console.log(JSON.stringify(result));
 			console.log(result.fullPath);
 			console.log(result.nativeURL);
+
+			
 		});
 		
 	};
