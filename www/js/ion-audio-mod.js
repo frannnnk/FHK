@@ -209,6 +209,10 @@ angular.module('ionic-audio-mod', ['ionic','ionic.utils'])
                 pause();
             },
 
+            resume: function() {
+                resume();
+            },
+
             seekTo: function(pos) {
                 seekTo(pos);
             },
@@ -365,7 +369,7 @@ angular.module('ionic-audio-mod', ['ionic','ionic.utils'])
           }
         }
     }])
-    .directive('ionAudioPlay', ['$cordovaFile', '$cordovaFileTransfer','$localstorage', function( $cordovaFile, $cordovaFileTransfer,$localstorage) {
+    .directive('ionAudioPlay', ['$cordovaFile', '$cordovaFileTransfer','$localstorage','$rootScope', function( $cordovaFile, $cordovaFileTransfer,$localstorage, $rootScope) {
         return {
             //scope: true,
             restrict: 'A',
@@ -383,6 +387,8 @@ angular.module('ionic-audio-mod', ['ionic','ionic.utils'])
                     element.addClass('ion-play');
                     element.removeClass('ion-pause');
                     element.text(attrs.textPlay);
+                    //$rootScope.masterPlayPauseBtn.addClass('ion-play');
+                    //$rootScope.masterPlayPauseBtn.removeClass('ion-pause');
                 };
 
                 var setText = function() {
@@ -392,7 +398,10 @@ angular.module('ionic-audio-mod', ['ionic','ionic.utils'])
                 };
 
                 var togglePlaying = function() {
+                    $rootScope.activePodcastElement = element;
                     element.toggleClass('ion-play ion-pause');
+                    $rootScope.masterPlayPauseBtn.attr("class",$rootScope.activePodcastElement.attr("class"));
+
                     setText();
                 };
 
@@ -447,6 +456,9 @@ angular.module('ionic-audio-mod', ['ionic','ionic.utils'])
                     //  Media.MEDIA_NONE or Media.MEDIA_STOPPED
                     if (status == 0 || status == 4) {
                         init();
+                        $rootScope.masterPlayPauseBtn.attr("class",$rootScope.activePodcastElement.attr("class"));
+
+
                     } else if (status == 2) {   // Media.MEDIA_RUNNING
                         isLoading = false;
                     }
@@ -529,16 +541,13 @@ angular.module('ionic-audio-mod', ['ionic','ionic.utils'])
         }
     }])
     
-    .directive('ionAudioProgressBar', ['MediaManager', function(MediaManager) {
+    .directive('ionAudioProgressBar', ['MediaManager','$rootScope', function(MediaManager,$rootScope) {
         return {
             restrict: 'E',
             template:
                 '<h2 class="ion-audio-track-info" ng-style="displayTrackInfo()">{{track.title}} - {{track.artist}}</h2>' +
                 '<div class="range">' +
-                '<a class="button button-icon icon" ng-class="getPlayPauseBtnClass()" ng-click="togglePlay()"></a>'+
-
-
-
+                '<a style="margin-right:20px;" id="masterPlayPauseBtn" class="button button-icon icon ion-play" ng-click="togglePlay()"></a>'+
                 '<ion-audio-progress track="track"></ion-audio-progress>' +
                 '<input type="range" name="volume" min="0" max="{{track.duration}}" ng-model="track.progress" on-release="sliderRelease()" disabled>' +
                 '<ion-audio-duration track="track"></ion-audio-duration>' +
@@ -548,6 +557,7 @@ angular.module('ionic-audio-mod', ['ionic','ionic.utils'])
             link: function(scope, element, attrs, controller) {
                 var slider =  element.find('input'), unbindTrackListener;
 
+                $rootScope.masterPlayPauseBtn = jQuery('#masterPlayPauseBtn');
                 scope.track = {
                     progress: 0,
                     status: 0,
@@ -567,17 +577,22 @@ angular.module('ionic-audio-mod', ['ionic','ionic.utils'])
                     return { visibility: angular.isDefined(attrs.displayInfo) && (scope.track.title || scope.track.artist) ? 'visible' : 'hidden'}
                 };
 
-                scope.getPlayPauseBtnClass = function (){
-                    if (true) {
-                        return "ion-pause";
-                    } else {
-                        return "ion-play";
-                    }
-                };
+              
 
                 scope.togglePlay = function(){
-                   console.log(track.status);
-                   MediaManager.pause();
+                   if (0 == scope.track.status) {
+                        return;
+                   }
+                   console.log( $rootScope.activePodcastElement.attr("class"));
+                   $rootScope.activePodcastElement.toggleClass('ion-play ion-pause');
+                   $rootScope.masterPlayPauseBtn.attr("class",$rootScope.activePodcastElement.attr("class"));
+
+                   if ( 2 == scope.track.status ) {
+                        MediaManager.pause();
+                   } else if (3 == scope.track.status ) {
+                        MediaManager.resume();
+                   }
+                   
                 }
 
                 // disable slider if track is not playing

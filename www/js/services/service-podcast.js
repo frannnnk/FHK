@@ -46,7 +46,7 @@ app.factory('PodcastService', function ($http, $q, $timeout, $cordovaFile, $loca
 									track.remoteURL = entry.mediaURL;
 									track.artist = 'Frank';
 									track.title = entry.title;
-									track.art = entry.indexImagePath;
+									track.art = entry.indexImageSqPath;
 									track.desc = entry.desc;
 									track.publishDate = entry.publishDate;
 									track.downloadProgress = 0;

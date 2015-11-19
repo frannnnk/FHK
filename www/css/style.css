@@ -28,4 +28,18 @@ body {
     opacity: 1;
 }
 
+.audio-control{
+	z-index:999;
+	width:100%;
+	position:fixed;
+	bottom:30px;
+	margin:0px;
+	padding:10px;
+}
+.audio-control.card{
+	width: 90%;
+}
+.podcast-place-holder{
+	margin-top:120px;
+}
 
