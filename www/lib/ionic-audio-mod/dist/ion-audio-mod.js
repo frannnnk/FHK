@@ -284,7 +284,7 @@ angular.module('ionic-audio-mod', ['ionic','ionic.utils'])
           restrict: 'EA',
           scope: {},
           require: ['ionAudioControls', '^^ionAudioTrack'],
-          controller: ['$scope', '$q', '$timeout', '$element', '$cordovaFile', '$cordovaFileTransfer', function($scope, $q, $timeout, $element, $cordovaFile,  $cordovaFileTransfer) {
+          controller: ['$scope', '$q', '$timeout', '$element', '$cordovaFile', '$cordovaFileTransfer','$localstorage', function($scope, $q, $timeout, $element, $cordovaFile,  $cordovaFileTransfer, $localstorage) {
               var spinnerElem = $element.find('ion-spinner'), hasLoaded, self = this;
 
               spinnerElem.addClass('ng-hide');
