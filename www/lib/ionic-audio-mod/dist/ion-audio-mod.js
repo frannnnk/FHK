@@ -461,7 +461,7 @@ angular.module('ionic-audio-mod', ['ionic','ionic.utils'])
     }])
 
     
-    .directive('ionAudioDownload', ['$cordovaFile', '$cordovaFileTransfer', function( $cordovaFile, $cordovaFileTransfer) {
+    .directive('ionAudioDownload', ['$cordovaFile', '$cordovaFileTransfer' , '$localstorage', function( $cordovaFile, $cordovaFileTransfer, $localstorage) {
         return {
             //scope: true,
             restrict: 'A',
