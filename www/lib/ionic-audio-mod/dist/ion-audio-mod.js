@@ -403,6 +403,10 @@ angular.module('ionic-audio-mod', ['ionic'])
                             .then(function (success) {
                                 // Exist
                                 scope.track.isDownloaded = true;
+                                if (isLoading) return;  //  debounce multiple clicks
+                                controller.playTrack();
+                                togglePlaying();
+                                if (currentStatus == 0) isLoading = true;
 
                                 
                               }, function (error) {
