@@ -7,36 +7,36 @@
 
   <ion-content >
 
-   <ion-refresher
-        pulling-text="Reload ..."
-        on-refresh="doRefresh()" >
-    </ion-refresher >
+  
 
     <!--
     This is the list of results rendered in the built in ionic 'card' list style.
     -->
     <ion-list>
       <div class="list card"
-           ng-repeat="post in blogs.results"
-           ui-sref="tab.post({id:post.id})">
+           ng-repeat="serv in friendConfig.services"
+           >
 
         <div class="item" >
-          <h2 >{{ post.title }}</h2 >
+          <h2>{{ serv.serviceName }}</h2 >
 
-          <p class="sub-title" ><i class="icon ion-ios-clock-outline"></i> {{ post.createDate }}</p >
+          <p class="sub-title" ><i class="icon ion-ios-clock-outline"></i> 計劃開始日期：{{serv.startDate}}</p >
         </div >
 
         <div class="item item-image" ng-if="post.indexImagePath" >
-          <img ng-src="{{ post.indexImagePath }}" >
+          <img  >
         </div >
 
-        <div class="item item-body" ng-if="post.desc">
-          <p >{{post.desc}}</p >
+        <div class="item item-body" ng-if="serv.serviceDescription">
+          <p >{{serv.serviceDescription}}</p >
+          <ion-frank-progress-bar-line ng-model="serv">
+
+          </ion-frank-progress-bar-line>
         </div >
       </div >
     </ion-list>
 
-    <ion-infinite-scroll ng-if="blogs.hasMore" immediate-check="false" on-infinite="loadMore()"></ion-infinite-scroll>
+
 
   </ion-content >
 </ion-view >
