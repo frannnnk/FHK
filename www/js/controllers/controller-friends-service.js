@@ -7,13 +7,33 @@ app.controller('FriendServiceController', function($scope,FriendsService, $local
 	console.log("FriendServiceController Init.");
 	$scope.frendService = FriendsService;
 
+	//$localstorage.set('frendService.friendConfig', null);
+
 	var friendConfigStr = $localstorage.get('frendService.friendConfig');
 	if ( angular.isUndefined(friendConfigStr) || friendConfigStr == "" ) {
+		console.log("friendConfigStr is undefined or empty, go to login page.");
+		$state.go('tab.friends');
+	}
+	$scope.friendConfig = JSON.parse(friendConfigStr);
+	console.log($scope.friendConfig);
+	if ( $scope.friendConfig.email == "" ) {
+		console.log("friendConfigStr is exist but email is empty, go to login page.");
 		$state.go('tab.friends');
 	}
 
-	$scope.friendConfig = JSON.parse(friendConfigStr);
-	console.log($scope.friendConfig);
+	$scope.friendConfig.email;
+
+
+	$scope.loadConfig = function(){
+		if (!$scope.frendService.isLoading) {
+			$scope.frendService.loadConfig($scope.friendConfig.email).then(function(data){
+				console.log("Reloading config ...");
+				console.log(data);
+				$localstorage.set('frendService.friendConfig', JSON.stringify(data));
+				$scope.$broadcast('scroll.refreshComplete');
+			});
+		}
+	};
 	  
 });
 

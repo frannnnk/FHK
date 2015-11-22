@@ -6,18 +6,27 @@ app.controller('FriendsController', function($scope,FriendsService, $localstorag
 	*/
 
 	$scope.frendService = FriendsService;
-
 	var friendConfig = $localstorage.get('frendService.friendConfig');
 	console.log(friendConfig);
-	if ( !angular.isUndefined(friendConfig) && friendConfig != "" ) {
-		console.log("Config exist, go to service page.");
-		$state.go('tab.friendservice');
-	}
+	
+
+	$scope.$on('$ionicView.beforeEnter', function() {
+	    if ( !angular.isUndefined(friendConfig) && friendConfig != "" ) {
+			var friendConfigObj = JSON.parse(friendConfig);
+			if (!angular.isUndefined(friendConfigObj)) {
+				if (  !angular.isUndefined(friendConfigObj.email ) && friendConfigObj.email != "" ) {
+					console.log("Config exist ("+friendConfigObj.email+"), go to service page.");
+					$state.go('tab.friendservice');
+				}
+			}			
+		}
+	});
+	
 
 
-	$scope.loadConfig = function(){
+	$scope.loadConfig = function(loginEmail){
 		if (!$scope.frendService.isLoading) {
-			$scope.frendService.loadConfig().then(function(data){
+			$scope.frendService.loadConfig(loginEmail).then(function(data){
 				// go to state
 				console.log(data);
 				$localstorage.set('frendService.friendConfig', JSON.stringify(data));

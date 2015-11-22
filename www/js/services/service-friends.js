@@ -8,7 +8,6 @@ app.factory('FriendsService', function ($http, $q, GET_FRIENDS_SERVICES_URL, SER
 		'page': 0,
 		'isLoading': false,
 		'hasMore': true,
-		'loginEmail':'',
 		'friendConfig':{},
 		'results': [],
 		'refresh': function () {
@@ -22,15 +21,15 @@ app.factory('FriendsService', function ($http, $q, GET_FRIENDS_SERVICES_URL, SER
 			self.page += 1;
 			return self.load();
 		},
-		'loadConfig': function () {
+		'loadConfig': function (loginEmail) {
 			console.log("Login ... ");
 			self.isLoading = true;
 			var deferred = $q.defer();
 
 			ionic.Platform.ready(function(){
 				
-				console.log("Calling api ... ");
-				$http.get(GET_FRIENDS_SERVICES_URL+ "&email="+self.loginEmail)
+				console.log("Calling api ("+loginEmail+")... ");
+				$http.get(GET_FRIENDS_SERVICES_URL+ "&email="+loginEmail)
 						.success(function (data) {
 							self.isLoading = false;
 							self.friendConfig = data;

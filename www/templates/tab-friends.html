@@ -11,14 +11,14 @@
 
     <div class="list list-inset">
        <label class="item item-input">
-        <input type="email" placeholder="Your Email" ng-model="frendService.loginEmail">
+        <input type="email" placeholder="Your Email" ng-model="loginEmail">
       </label>
     </div>
 
     
     <div class="row">
        <div class="col text-center">
-          <button class="button button-energized" ng-click="loadConfig();">
+          <button class="button button-energized" ng-click="loadConfig(loginEmail);">
             進入小夥伴專區
           </button>
        </div>

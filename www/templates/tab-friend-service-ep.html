@@ -1,0 +1,48 @@
+<ion-view view-title="Podcast" hide-nav-bar="false">
+  
+  
+  
+  <ion-content>
+
+    <ion-refresher
+        pulling-text="Reload ..."
+        on-refresh="doRefresh()" >
+    </ion-refresher >
+    <ion-list>
+      <ion-audio-track ng-repeat="track in podcasts.results" track="track">
+          <div class="list list-inset">
+              <div class="item item-thumbnail-left">
+                  <img src="{{track.art}}">
+                  <h2>{{track.title}}</h2>
+                  <p>{{track.artist}} - <small>{{track.publishDate}}</small></p>
+                  <ion-audio-controls>
+                        <a class="button button-icon icon" ng-show="track.isDownloaded" ion-audio-play></a>
+                        <a class="button button-icon icon" ng-hide="track.isDownloaded" ion-audio-download></a>
+                        <ion-spinner icon="ios"></ion-spinner>
+                    </ion-audio-controls>
+                     <div ng-hide="track.isDownloaded" style="border-top:2px solid black;width:{{track.downloadProgress}}%;">
+                             
+                    </div>
+              </div>
+             
+             
+
+          </div>
+      </ion-audio-track>
+      <div class="podcast-place-holder"></div>
+    </ion-list>
+   
+
+    <ion-infinite-scroll ng-if="podcasts.hasMore" immediate-check="false" on-infinite="loadMore()"></ion-infinite-scroll>
+
+  </ion-content>
+  <div class="audio-control">
+   <div class="card">
+
+      <div class="item item-divider item-stable">
+        <ion-audio-progress-bar display-time display-info></ion-audio-progress-bar>
+      </div>
+   </div>
+  </div>
+
+</ion-view>
