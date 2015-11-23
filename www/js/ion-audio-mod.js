@@ -456,8 +456,9 @@ angular.module('ionic-audio-mod', ['ionic','ionic.utils'])
                     //  Media.MEDIA_NONE or Media.MEDIA_STOPPED
                     if (status == 0 || status == 4) {
                         init();
-                        $rootScope.masterPlayPauseBtn.attr("class",$rootScope.activePodcastElement.attr("class"));
-
+                        if (angular.isDefined($rootScope.activePodcastElement)) {
+                            $rootScope.masterPlayPauseBtn.attr("class",$rootScope.activePodcastElement.attr("class"));
+                        }
 
                     } else if (status == 2) {   // Media.MEDIA_RUNNING
                         isLoading = false;

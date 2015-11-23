@@ -17,9 +17,9 @@ angular.module('frank', ['ionic',
                          'frank.service.blog',
                          'frank.service.blog.detail',
                          'frank.service.podcast',
+                         'frank.service.englishpod',
                          'frank.service.friend',
                          'frank.controllers.friends.service',
-                         'frank.controllers.englishpod',
                          'ionic.utils',
                          'ngIOS9UIWebViewPatch'
                          ])
