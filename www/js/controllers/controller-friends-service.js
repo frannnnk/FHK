@@ -21,7 +21,7 @@ app.controller('FriendServiceController', function($scope,FriendsService, $local
 		$state.go('tab.friends');
 	}
 
-	$scope.friendConfig.email;
+	//$scope.frendService.user = $scope.friendConfig.email;
 
 
 	$scope.loadConfig = function(){
@@ -55,13 +55,14 @@ app.controller('EnglishPodController', function($scope,$ionicLoading,FriendsServ
 		console.log("friendConfigStr is exist but email is empty, go to login page.");
 		$state.go('tab.friends');
 	}
+	$scope.englishPodService.user = $scope.friendConfig.email;
 
 
 	/* Show loading  */
 	$ionicLoading.show({template:'Loading...'});
 
 	/* Load data */
-	$scope.englishPodService.load($scope.friendConfig.email).then(function(){
+	$scope.englishPodService.load().then(function(){
 		$ionicLoading.hide();
 	});
 

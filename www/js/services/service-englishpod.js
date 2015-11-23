@@ -10,25 +10,26 @@ app.factory('EnglishPodService', function ($http, $q, $timeout, $cordovaFile, $l
 		'page': 0,
 		'isLoading': false,
 		'hasMore': true,
+		'user':"",
 		'results': [],
-		'refresh': function () {
+		'refresh': function (email) {
 			self.page = 0;
 			self.isLoading = false;
 			self.hasMore = true;
 			self.results = [];
-			return self.load();
+			return self.load(email);
 		},
 		'next': function () {
 			self.page += 1;
 			return self.load();
 		},
-		'load': function (email) {
+		'load': function () {
 			self.isLoading = true;
 			var deferred = $q.defer();
 
 			ionic.Platform.ready(function(){
 				
-				$http.get(ENGLISHPOD_FEED_URL+ "&user="+email+"&limit=5&seq="+self.page)
+				$http.get(ENGLISHPOD_FEED_URL+ "&user="+self.user+"&limit=5&seq="+self.page)
 						.success(function (data) {
 							self.isLoading = false;
 							
