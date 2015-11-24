@@ -21,6 +21,7 @@ angular.module('frank', ['ionic',
                          'frank.service.friend',
                          'frank.controllers.friends.service',
                          'ionic.utils',
+                         'frank.controllers.pdfviewer',
                          'ngIOS9UIWebViewPatch'
                          ])
 
@@ -162,6 +163,16 @@ angular.module('frank', ['ionic',
         'tab-friends': {
           templateUrl: "templates/tab-friend-service-ep.html",
           controller: 'EnglishPodController'
+        }
+      }      
+    })
+
+  .state('tab.pdfviewer', {
+      url: "/pdfviewer",
+      views: {
+        'tab-friends': {
+          templateUrl: "templates/tab-pdfviewer.html",
+          controller: 'PdfViewerController'
         }
       }      
     });

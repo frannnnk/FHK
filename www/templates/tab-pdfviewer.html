@@ -1,0 +1,20 @@
+<ion-view view-title="PDF"  hide-nav-bar="false">
+  
+   <ion-content >
+
+  <style>
+  canvas{width:100%;}
+  </style> 
+  
+  <br>
+  <button ng-click="prevPage()" class="button ion-ios-arrow-back button-outline button-small button-positive"> 上一頁</button>
+  <button ng-click="nextPage()" class="button icon-right ion-ios-arrow-forward button-outline button-small button-positive"> 下一頁</button>
+ <br>
+  
+  <span>{{currentPage}}/{{totalPages}}</span>
+  <br>
+  <pdfviewer src="http://www.franks.hk/EP/EnglishPod/englishpod_E0136.pdf" on-page-load='pageLoaded(page,total)' id="viewer"></pdfviewer>
+
+
+  </ion-content >
+</ion-view >

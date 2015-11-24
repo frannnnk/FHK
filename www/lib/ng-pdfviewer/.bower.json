@@ -1,0 +1,11 @@
+{
+  "name": "ng-pdfviewer",
+  "_cacheHeaders": {
+    "Content-Type": "text/html; charset=utf-8"
+  },
+  "main": "index",
+  "_source": "https://github.com/akrennmair/ng-pdfviewer",
+  "_target": "*",
+  "_originalSource": "https://github.com/akrennmair/ng-pdfviewer",
+  "_direct": true
+}

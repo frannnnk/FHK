@@ -49,7 +49,7 @@ app.factory('EnglishPodService', function ($http, $q, $timeout, $cordovaFile, $l
 									track.level = entry.level;
 									track.createDate = entry.createDate;
 									track.mp3Path=entry.mp3Path;
-									track.pdf3Path=entry.pdf3Path;
+									track.pdfPath=entry.pdfPath;
 									track.fileId=entry.fileId;
 									track.downloadProgress = 0;
 									track.id = "englishpod_"+entry.fileId;

@@ -32,6 +32,8 @@
                   <ion-audio-controls>
                         <a class="button button-icon icon" ng-show="track.isDownloaded" ion-audio-play></a>
                         <a class="button button-icon icon" ng-hide="track.isDownloaded" ion-audio-download></a>
+                        <a class="button button-icon icon ion-ios-book-outline" ui-sref="tab.pdfviewer()"  ng-show="track.pdfPath" ></a>
+
                         <ion-spinner icon="ios"></ion-spinner>
                     </ion-audio-controls>
                      <div ng-hide="track.isDownloaded" style="border-top:2px solid black;width:{{track.downloadProgress}}%;">
