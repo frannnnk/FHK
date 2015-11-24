@@ -1,20 +1,29 @@
 <ion-view view-title="PDF"  hide-nav-bar="false">
+    
+   <ion-header-bar class="bar-dark bar-subheader">
+    <div style="float:right;">
+      <button ng-click="prevPage()"  class="button icon-left ion-ios-arrow-back button-clear button-small button-light"> 上一頁</button>
+      <button ng-click="nextPage()"  class="button icon-right ion-ios-arrow-forward button-clear button-small button-light"> 下一頁</button>
+    </div>
+    <button class="button  button-clear button-small button-light"> {{currentPage}}/{{totalPages}} </button>
+ </ion-header-bar>
   
    <ion-content >
 
   <style>
   canvas{width:100%;}
   </style> 
-  
-  <br>
-  <button ng-click="prevPage()" class="button ion-ios-arrow-back button-outline button-small button-positive"> 上一頁</button>
-  <button ng-click="nextPage()" class="button icon-right ion-ios-arrow-forward button-outline button-small button-positive"> 下一頁</button>
- <br>
-  
-  <span>{{currentPage}}/{{totalPages}}</span>
-  <br>
-  <pdfviewer src="http://www.franks.hk/EP/EnglishPod/englishpod_E0136.pdf" on-page-load='pageLoaded(page,total)' id="viewer"></pdfviewer>
 
+
+
+  
+  
+  
+  
+  <pdfviewer src="http://www.franks.hk/EP/EnglishPod/englishpod_E0136.pdf" on-page-load='pageLoaded(page,total)' id="viewer"></pdfviewer>
+<!--
+  <ion-infinite-scroll ng-if="currentPage != totalPages" immediate-check="false" on-infinite="nextPage()"></ion-infinite-scroll>
+-->
 
   </ion-content >
 </ion-view >
